@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHPMailer Complete Email System</title>
+    <title>Email Form 4 - Secure PHPMailer</title>
     <style>
         * {
             margin: 0;
@@ -13,184 +13,237 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
             padding: 20px;
         }
 
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
         .header {
-            text-align: center;
+            background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
             color: white;
-            padding: 60px 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            margin-bottom: 40px;
-            backdrop-filter: blur(10px);
+            padding: 30px 20px;
+            text-align: center;
         }
 
         .header h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-size: 2rem;
+            margin-bottom: 10px;
         }
 
         .header p {
-            font-size: 1.2rem;
             opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
         }
 
-        .warning {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .warning h3 {
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-        }
-
-        .warning p {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-        }
-
-        .warning .highlight {
-            background: rgba(255,255,255,0.2);
-            padding: 10px 15px;
-            border-radius: 5px;
-            font-family: monospace;
-            display: inline-block;
-            margin: 10px 0;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .feature-card {
-            background: white;
+        .content {
             padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
         }
 
-        .feature-card:hover {
-            transform: translateY(-5px);
+        .security-badge {
+            display: inline-block;
+            background: #4caf50;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
         }
 
-        .feature-card h3 {
-            color: #667eea;
-            margin-bottom: 15px;
-            font-size: 1.3rem;
+        .info-box {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
         }
 
-        .feature-card ul {
+        .info-box h3 {
+            color: #c62828;
+            margin-bottom: 8px;
+        }
+
+        .info-box ul {
             list-style: none;
-            padding: 0;
         }
 
-        .feature-card li {
-            padding: 8px 0;
-            padding-left: 25px;
+        .info-box li {
+            color: #555;
+            padding: 5px 0;
+            padding-left: 20px;
             position: relative;
-            color: #666;
         }
 
-        .feature-card li:before {
-            content: "✓";
-            color: #4CAF50;
-            font-weight: bold;
+        .info-box li:before {
+            content: "🔒";
             position: absolute;
             left: 0;
         }
 
-        .installation {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-
-        .installation h2 {
-            color: #333;
+        .form-group {
             margin-bottom: 20px;
-            text-align: center;
-            font-size: 2rem;
         }
 
-        .code-block {
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-row.full {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #f44336;
+            box-shadow: 0 0 5px rgba(244, 67, 54, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-group small {
+            display: block;
+            margin-top: 5px;
+            color: #999;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            opacity: 0.9;
+        }
+
+        .btn-back {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-back:hover {
+            background: #d0d0d0;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alert-success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            color: #155724;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            border-left: 4px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        .debug-info {
             background: #f5f5f5;
             border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 15px 0;
+            padding: 10px;
+            border-radius: 5px;
             font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            overflow-x: auto;
+            font-size: 0.85rem;
+            margin-top: 10px;
         }
 
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .step {
+        .php-links {
             background: #f8f9fa;
             padding: 20px;
             border-radius: 8px;
-            border-left: 4px solid #667eea;
+            margin-bottom: 20px;
         }
 
-        .step h4 {
-            color: #667eea;
-            margin-bottom: 10px;
-        }
-
-        .github-link {
+        .php-links h3 {
+            color: #333;
+            margin-bottom: 15px;
             text-align: center;
-            margin-top: 40px;
         }
 
-        .github-link a {
-            display: inline-block;
-            background: linear-gradient(135deg, #24292e 0%, #1a1e22 100%);
+        .php-links .link-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .php-links a {
+            display: block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 15px 30px;
+            padding: 12px;
             text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: transform 0.3s ease;
-        }
-
-        .github-link a:hover {
-            transform: translateY(-2px);
-        }
-
-        .footer {
+            border-radius: 5px;
             text-align: center;
-            color: white;
-            padding: 20px;
+            transition: opacity 0.3s;
+        }
+
+        .php-links a:hover {
             opacity: 0.8;
         }
     </style>
@@ -199,30 +252,16 @@
     <div class="container">
         <div class="header">
             <h1>📧 PHPMailer Complete</h1>
-            <p>Professional PHP Email System with Multiple Implementations</p>
+            <p>Professional PHP Email System by ZAINKHANTAREEN</p>
         </div>
 
-        <div class="warning">
-            <h3>⚠️ Important Notice</h3>
-            <p>This is a <strong>PHP project</strong> that requires a web server with PHP support to run properly.</p>
-            <p class="highlight">GitHub Pages only serves static files and cannot execute PHP code.</p>
-            <p>To use this email system, download/clone the repository and run it on a PHP-enabled web server (XAMPP, WAMP, or any hosting with PHP).</p>
-        </div>
+        <div class="content">
+            <div class="security-badge">✓ SECURE EMAIL SYSTEM</div>
 
-        <div class="features">
-            <div class="feature-card">
-                <h3>📝 Email Forms</h3>
+            <div class="info-box">
+                <h3>Security Features</h3>
                 <ul>
-                    <li>Basic email sending with PHP mail()</li>
-                    <li>HTML email with professional styling</li>
-                    <li>Email with file attachments</li>
-                    <li>Secure PHPMailer with SMTP</li>
-                </ul>
-            </div>
-
-            <div class="feature-card">
-                <h3>🔒 Security Features</h3>
-                <ul>
+                    <li>PHPMailer library for SMTP</li>
                     <li>Input validation & sanitization</li>
                     <li>XSS & SQL injection protection</li>
                     <li>Email format validation</li>
@@ -231,53 +270,32 @@
                 </ul>
             </div>
 
-            <div class="feature-card">
-                <h3>⚙️ PHPMailer Integration</h3>
-                <ul>
-                    <li>SMTP configuration support</li>
-                    <li>Real PHPMailer library detection</li>
-                    <li>Fallback mock implementation</li>
-                    <li>Error handling & debugging</li>
-                    <li>CC/BCC functionality</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="installation">
-            <h2>🚀 Installation & Setup</h2>
-
-            <div class="steps">
-                <div class="step">
-                    <h4>1. Download</h4>
-                    <p>Clone or download this repository to your local machine.</p>
-                    <div class="code-block">
-git clone https://github.com/zainkhantareen07/PHPMailer.git
-                    </div>
-                </div>
-
-                <div class="step">
-                    <h4>2. Web Server</h4>
-                    <p>Place files in your web server's document root (htdocs/www folder).</p>
-                    <p><strong>Requires:</strong> Apache/Nginx with PHP 7.0+</p>
-                </div>
-
-                <div class="step">
-                    <h4>3. Dependencies</h4>
-                    <p>Install PHPMailer via Composer (optional, has fallback).</p>
-                    <div class="code-block">
-composer install
-                    </div>
-                </div>
-
-                <div class="step">
-                    <h4>4. Configuration</h4>
-                    <p>Configure SMTP settings in <code>phpmailer_config.php</code>.</p>
-                    <p>Copy from <code>phpmailer_config.php.example</code></p>
+            <div class="php-links">
+                <h3>Access PHP Email Forms</h3>
+                <div class="link-grid">
+                    <a href="email_1_basic.php">📧 Basic Email Form</a>
+                    <a href="email_2_html.php">🎨 HTML Email Form</a>
+                    <a href="email_3_attachments.php">📎 Email with Attachments</a>
+                    <a href="email_4_phpmailer.php">🔒 Secure PHPMailer</a>
+                    <a href="email_hub.php">🏠 Email Hub</a>
+                    <a href="test_send.php">🧪 Test Script</a>
                 </div>
             </div>
 
-            <h3 style="margin-top: 30px; color: #333;">SMTP Configuration Example:</h3>
-            <div class="code-block">
+            <div class="alert alert-error">
+                <strong>⚠️ Important Notice:</strong> This is a PHP project that requires a web server with PHP support to run properly. GitHub Pages only serves static files and cannot execute PHP code. To use this email system, download/clone the repository and run it on a PHP-enabled web server (XAMPP, WAMP, or any hosting with PHP).
+            </div>
+
+            <div class="form-row full">
+                <div class="form-group">
+                    <label for="instructions">Installation Instructions</label>
+                    <textarea id="instructions" readonly style="background: #f9f9f9;">
+1. Clone or download this repository
+2. Place files in your web server's document root (htdocs/www folder)
+3. Configure SMTP settings in phpmailer_config.php (copy from phpmailer_config.php.example)
+4. Access email_hub.php to navigate between different email forms
+
+SMTP Configuration Example:
 <?php
 $config = [
     'host' => 'smtp.gmail.com',
@@ -289,17 +307,14 @@ $config = [
     'smtp_debug' => 0
 ];
 ?>
+                    </textarea>
+                </div>
             </div>
-        </div>
 
-        <div class="github-link">
-            <a href="https://github.com/zainkhantareen07/PHPMailer" target="_blank">
-                📂 View Source Code on GitHub
-            </a>
-        </div>
-
-        <div class="footer">
-            <p>© 2024 PHPMailer Complete Email System | Open Source MIT License</p>
+            <div class="button-group">
+                <button type="button" class="btn-submit" onclick="window.open('https://github.com/zainkhantareen07/PHPMailer', '_blank')">View on GitHub</button>
+                <button type="button" class="btn-back" onclick="location.href='README.md'">View README</button>
+            </div>
         </div>
     </div>
 </body>
