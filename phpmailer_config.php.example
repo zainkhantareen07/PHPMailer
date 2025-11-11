@@ -1,0 +1,45 @@
+<?php
+/**
+ * phpmailer_config.php.example
+ * Copy this file to `phpmailer_config.php` and fill in your SMTP credentials.
+ * Keep real credentials out of source control.
+ */
+
+$config = [
+    // Demo mode: if true, the script will simulate sends instead of connecting to SMTP
+    'demo' => true,
+
+    // SMTP server settings (used when 'demo' => false)
+    'host' => 'smtp.example.com',       // e.g. smtp.gmail.com or smtp.mailtrap.io
+    'port' => 587,
+    'smtp_auth' => true,
+    'username' => 'your_smtp_username', // often the full email address
+    'password' => 'your_smtp_password_or_app_password',
+
+    // Encryption: one of 'tls', 'ssl' or empty for none. PHPMailer constants also accepted.
+    'smtp_secure' => 'tls',
+
+    // Verbosity of SMTP debug output. 0 = off, 1 = client, 2 = client+server
+    'smtp_debug' => 0,
+
+    // Optional SMTP options (for self-signed certificates etc.)
+    'smtp_options' => [
+        'ssl' => [
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => true,
+        ],
+    ],
+];
+
+// Helpful presets (uncomment to use):
+// MailHog (local dev):
+// $config = array_merge($config, ['demo' => false, 'host' => 'localhost', 'port' => 1025, 'smtp_auth' => false]);
+
+// Mailtrap (testing):
+// $config = array_merge($config, ['demo' => false, 'host' => 'smtp.mailtrap.io', 'port' => 2525]);
+
+// Gmail (production) - use an app password if 2FA is enabled:
+// $config = array_merge($config, ['demo' => false, 'host' => 'smtp.gmail.com', 'port' => 587, 'smtp_secure' => 'tls']);
+
+?>
