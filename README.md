@@ -39,7 +39,7 @@ Edit `phpmailer_config.php` with your SMTP credentials:
 ```php
 $config = [
     'host' => 'smtp.gmail.com',
-    'username' => 'your-email@gmail.com',
+    'username' => 'Zainkhantareen07@gmail.com',
     'password' => 'your-app-password',
     'smtp_secure' => 'tls',
     'port' => 587,
